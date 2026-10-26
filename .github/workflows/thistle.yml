@@ -1,0 +1,32 @@
+name: "SYCAMORE"
+run-name: "PRAIRIE"
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+permissions:
+  id-token: write
+  contents: read
+  pages: write
+jobs:
+  Sandbar:
+    concurrency:
+      group: "LAGOON-${{ github.workflow }}"
+      cancel-in-progress: false
+    runs-on: ubuntu-24.04
+    environment:
+      name: "github-pages"
+      url: ${{ steps.xeric.outputs.page_url }}
+    steps:
+      - name: "Canvas"
+        uses: actions/checkout@v4
+      - name: "Shoreline"
+        uses: actions/configure-pages@v6
+      - name: "moss"
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: .
+      - name: "Arrow"
+        id: xeric
+        uses: actions/deploy-pages@v5
